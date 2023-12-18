@@ -85,8 +85,7 @@ int main() {
                                                 (first_circle_y + (circle_area + spacing_y) * line));
                             matrix_pion[column][line] = 2;
                             if (victory(matrix_pion, 2) ==2) {
-                                play_area.load_pion("./image/victoirebleu.bmp", 0, 150);
-                                quit=true;
+                                play_area.load_pion("./image/victoirebleu.bmp", 40, 200);
                             }
                         } else {
                             play_area.load_pion("./image/pion_rouge.png",
@@ -94,8 +93,7 @@ int main() {
                                                 (first_circle_y + (circle_area + spacing_y) * line));
                             matrix_pion[column][line] = 1;
                             if (victory(matrix_pion, 1) ==1) {
-                                play_area.load_pion("./image/victoirerouge.bmp", 0, 150);
-                                quit=true;
+                                play_area.load_pion("./image/victoirerouge.bmp", 40, 200);
                             }
                         }
                         ++compteur;
