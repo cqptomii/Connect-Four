@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Window.hpp"
-#include "mouse_verif.hpp"
+#include "victory.hpp"
 int main() {
     Window play_area;
     if(!play_area.setup_window()){
@@ -8,14 +8,12 @@ int main() {
     }
     play_area.load_background();
     //init Victory matrix
-    short matrix_pion[7][6]={0};
+    int matrix_pion[7][6]={0};
 
     //init position variable of the grid
     short first_circle_x=23,first_circle_y=115;
     //spacing between two circle
     short spacing_y=14,spacing_x=14,circle_area=71;
-    // mouse position variable
-    int mouse_position_x=0,mouse_position_y=0;
     int compteur=0,column,line;
     bool quit=false;
     while(!quit){
@@ -86,11 +84,19 @@ int main() {
                                                 (first_circle_x + (circle_area + spacing_x) * column),
                                                 (first_circle_y + (circle_area + spacing_y) * line));
                             matrix_pion[column][line] = 2;
+                            if (victory(matrix_pion, 2) ==2) {
+                                play_area.load_pion("./image/victoirebleu.bmp", 0, 150);
+                                quit=true;
+                            }
                         } else {
                             play_area.load_pion("./image/pion_rouge.png",
                                                 (first_circle_x + (circle_area + spacing_x) * column),
                                                 (first_circle_y + (circle_area + spacing_y) * line));
                             matrix_pion[column][line] = 1;
+                            if (victory(matrix_pion, 1) ==1) {
+                                play_area.load_pion("./image/victoirerouge.bmp", 0, 150);
+                                quit=true;
+                            }
                         }
                         ++compteur;
                     }
