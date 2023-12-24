@@ -16,6 +16,7 @@ int main() {
     short spacing_y=14,spacing_x=14,circle_area=71;
     int compteur=0,column,line;
     bool quit=false;
+    bool victory_status=false;
     while(!quit){
         bool show=true;
         SDL_Event game_event;
@@ -28,50 +29,52 @@ int main() {
                     break;
                 case SDL_MOUSEBUTTONDOWN:
                     //obtain the column
-                    if (game_event.button.x >= 32 && game_event.button.x <= 102) {
-                        column = 0;
-                    }
-                    if (game_event.button.x >= (32 + (spacing_x + circle_area) * 1) &&
-                        game_event.button.x <= (102 + (spacing_x + circle_area) * 1)) {
-                        column = 1;
-                    }
-                    if (game_event.button.x >= (32 + (spacing_x + circle_area) * 2) &&
-                        game_event.button.x <= (102 + (spacing_x + circle_area) * 2)) {
-                        column = 2;
-                    }
-                    if (game_event.button.x >= (32 + (spacing_x + circle_area) * 3) &&
-                        game_event.button.x <= (102 + (spacing_x + circle_area) * 3)) {
-                        column = 3;
-                    }
-                    if (game_event.button.x >= (32 + (spacing_x + circle_area) * 4) &&
-                        game_event.button.x <= (102 + (spacing_x + circle_area) * 4)) {
-                        column = 4;
-                    }
-                    if (game_event.button.x >= (32 + (spacing_x + circle_area) * 5) &&
-                        game_event.button.x <= (102 + (spacing_x + circle_area) * 5)) {
-                        column = 5;
-                    }
-                    if (game_event.button.x >= (32 + (spacing_x + circle_area) * 6) &&
-                        game_event.button.x <= (102 + (spacing_x + circle_area) * 6)) {
-                        column = 6;
-                    }
-                    if (matrix_pion[column][5] == 0) {
-                        line = 5;
-                    } else {
-                        if (matrix_pion[column][4] == 0) {
-                            line = 4;
+                    if(!victory_status) {
+                        if (game_event.button.x >= 32 && game_event.button.x <= 102) {
+                            column = 0;
+                        }
+                        if (game_event.button.x >= (32 + (spacing_x + circle_area) * 1) &&
+                            game_event.button.x <= (102 + (spacing_x + circle_area) * 1)) {
+                            column = 1;
+                        }
+                        if (game_event.button.x >= (32 + (spacing_x + circle_area) * 2) &&
+                            game_event.button.x <= (102 + (spacing_x + circle_area) * 2)) {
+                            column = 2;
+                        }
+                        if (game_event.button.x >= (32 + (spacing_x + circle_area) * 3) &&
+                            game_event.button.x <= (102 + (spacing_x + circle_area) * 3)) {
+                            column = 3;
+                        }
+                        if (game_event.button.x >= (32 + (spacing_x + circle_area) * 4) &&
+                            game_event.button.x <= (102 + (spacing_x + circle_area) * 4)) {
+                            column = 4;
+                        }
+                        if (game_event.button.x >= (32 + (spacing_x + circle_area) * 5) &&
+                            game_event.button.x <= (102 + (spacing_x + circle_area) * 5)) {
+                            column = 5;
+                        }
+                        if (game_event.button.x >= (32 + (spacing_x + circle_area) * 6) &&
+                            game_event.button.x <= (102 + (spacing_x + circle_area) * 6)) {
+                            column = 6;
+                        }
+                        if (matrix_pion[column][5] == 0) {
+                            line = 5;
                         } else {
-                            if (matrix_pion[column][3] == 0) {
-                                line = 3;
+                            if (matrix_pion[column][4] == 0) {
+                                line = 4;
                             } else {
-                                if (matrix_pion[column][2] == 0) {
-                                    line = 2;
+                                if (matrix_pion[column][3] == 0) {
+                                    line = 3;
                                 } else {
-                                    if (matrix_pion[column][1] == 0) {
-                                        line = 1;
+                                    if (matrix_pion[column][2] == 0) {
+                                        line = 2;
                                     } else {
-                                        if (matrix_pion[column][0] == 0) {
-                                            line = 0;
+                                        if (matrix_pion[column][1] == 0) {
+                                            line = 1;
+                                        } else {
+                                            if (matrix_pion[column][0] == 0) {
+                                                line = 0;
+                                            }
                                         }
                                     }
                                 }
@@ -86,6 +89,7 @@ int main() {
                             matrix_pion[column][line] = 2;
                             if (victory(matrix_pion, 2) ==2) {
                                 play_area.load_pion("./image/victoirebleu.bmp", 40, 200);
+                                victory_status=true;
                             }
                         } else {
                             play_area.load_pion("./image/pion_rouge.png",
@@ -94,6 +98,7 @@ int main() {
                             matrix_pion[column][line] = 1;
                             if (victory(matrix_pion, 1) ==1) {
                                 play_area.load_pion("./image/victoirerouge.bmp", 40, 200);
+                                victory_status=true;
                             }
                         }
                         ++compteur;
