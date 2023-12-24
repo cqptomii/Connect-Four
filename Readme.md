@@ -1,6 +1,7 @@
 # Connect Four
 
-
+The main goal of this project is to teach me SDL basis. <br>
+This program is made under Linux but you can easily compile it on Window if you have SDL / SDL_image libraries on your desktop.
 
 
 ### Compilation :
@@ -11,7 +12,7 @@ make : ``` g++ main.cpp Window.cpp Texture.cpp victory.cpp -w -lSDL2 -lSDL2_imag
 
 run : ``` ./Connect_Four```
 
-### Description
+### Images
 
 <br>
 
